@@ -7,6 +7,7 @@ from filters import quality_semitone_strings_filter, keyboard_note_filter, slash
     slash_chord_filter
 
 
+
 def suspension_scanner(remaining_extensions, quality_semitones):
     """Searches remaining extensions for chord suspensions and inserts them into the semitone jumps list.
     Also removes the b3 (3) or 3 (4) semitone indices if present.
@@ -200,7 +201,6 @@ def no3_scanner(semitone_jumps, interval_strings):
 
     return semitone_jumps, interval_strings
 
-
 def semitones_to_keyboard_inputs(root, semitone_jumps):
 
     default_keyboard_values = []
@@ -261,4 +261,3 @@ def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_inte
     final_keyboard_values = corrected_keyboard_values
 
     return final_interval_notes, final_interval_strings, final_keyboard_values
-

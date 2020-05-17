@@ -4,7 +4,6 @@ Filter functions pick out single elements from their inputs and return them
 from converters import quality_to_semitones, semitones_to_strings
 from dictionaries import quality_templates, flat_roots, sharp_roots, scan_roots, keyboard_roots
 
-
 def root_filter(chord, web=False):
 
     if len(chord) > 1:
@@ -135,7 +134,6 @@ def no3_filter(chord):
         return chord, True
     else:
         return chord, False
-
 
 def space_bracket_comma_filter(chord):
     unacceptable = " (),"

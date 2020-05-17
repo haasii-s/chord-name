@@ -5,6 +5,7 @@ from retrievers import get_chord_web, get_chord_in_line
 from scanners import semitones_to_keyboard_inputs
 
 
+
 def main():
 
     # Test all proper combinations
@@ -25,6 +26,13 @@ def main():
 
     full_chord = input("Enter chord: ")
     print(get_chord_web(full_chord))
+            full_chord = "C#" + name
+            print(full_chord)
+            print(get_chord_web(full_chord))
+
+    """Test in line input
+    print(get_chord_in_line())
+    """
 
 
 if __name__ == "__main__":
@@ -37,6 +45,14 @@ if __name__ == "__main__":
     except TypeError:
         print("Chord quality not recognized")
     #"""
+    main()
+
+    """# Test loop for in line inputs (add while True de-indented prior
+    try:
+        main()
+    except TypeError:
+        print("chord not recognized")
+    """
 
     """
     import cProfile
@@ -52,4 +68,5 @@ if __name__ == "__main__":
     with open("output_calls.txt", "w") as f:
         p = pstats.Stats("output.dat", stream=f)
         p.sort_stats("calls").print_stats()
-    #"""
+
+    """
