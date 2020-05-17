@@ -9,6 +9,13 @@ app = Flask(__name__)
 CORS(app)
 
 
+@app.route("/test_get", methods=["GET"])
+def get_test():
+    if request.method == "GET":
+
+        return jsonify(data="GET IS WORKING")
+    
+"""
 @app.route("/get_chord/", methods=["POST", "GET"])
 def get_chord_post():
     if request.method == "POST":
@@ -19,7 +26,7 @@ def get_chord_post():
         interval_notes, interval_strings = output
 
         return jsonify(notes=interval_notes, strings=interval_strings)
-
+"""
 
 @app.route("/")
 def index():
