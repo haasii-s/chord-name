@@ -1,0 +1,9 @@
+@import "~antd/dist/antd.css";
+
+.ant-typography code {
+  font-size: 16px;
+}
+
+.ant-divider-horizontal {
+  margin: 12px 0;
+}
