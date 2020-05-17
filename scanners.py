@@ -2,8 +2,10 @@
 Scanner functions alter the input given to them and return the altered inputs based on logic and dictionaries
 """
 from converters import quality_to_semitones, interval_to_int
-from dictionaries import extensions
-from filters import quality_semitone_strings_filter
+from dictionaries import extensions, keyboard_roots, scan_roots
+from filters import quality_semitone_strings_filter, keyboard_note_filter, slash_keyboard_note_filter, \
+    slash_chord_filter
+
 
 
 def suspension_scanner(remaining_extensions, quality_semitones):
@@ -198,3 +200,64 @@ def no3_scanner(semitone_jumps, interval_strings):
         del interval_strings[i]
 
     return semitone_jumps, interval_strings
+
+def semitones_to_keyboard_inputs(root, semitone_jumps):
+
+    default_keyboard_values = []
+    keyboard_start_value = keyboard_note_filter(root)
+
+    for i in semitone_jumps:
+        next_default_keyboard_value = i + keyboard_start_value
+        default_keyboard_values.append(next_default_keyboard_value)
+
+    default_keyboard_values.insert(0, keyboard_start_value)
+
+    return default_keyboard_values
+
+
+def slash_chord_scanner(slash_content, interval_notes, interval_strings, default_keyboard_values):
+
+    slash_content = slash_content[0].upper() + slash_content[1:]
+
+    chord, multi_slash_content, multi_slash_found = slash_chord_filter(slash_content)
+
+    if multi_slash_found:
+        # potential method instead - accounts for '/' removed from multi_slash_content
+        first_slash_end_index = len(slash_content) - (len(multi_slash_content) + 1)
+        slash_content = slash_content[:first_slash_end_index]
+        slash_chord_scanner(multi_slash_content, interval_notes, interval_strings, default_keyboard_values)
+
+    if slash_content in scan_roots():
+
+        interval_notes.insert(0, slash_content)
+        interval_strings.insert(0, "/"+slash_content)
+        slash_keyboard_value = slash_keyboard_note_filter(default_keyboard_values, slash_content)
+        default_keyboard_values.insert(0, slash_keyboard_value)
+
+        return interval_notes, interval_strings, default_keyboard_values
+
+    else:
+        return interval_notes, interval_strings, default_keyboard_values
+
+
+def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_interval_strings, scan_keyboard_values):
+
+    number_of_recursions = len(scan_interval_notes) - len(interval_notes)
+    slash_note_elements = scan_interval_notes[:number_of_recursions]
+    slash_note_elements.reverse()
+    final_interval_notes = slash_note_elements + scan_interval_notes[number_of_recursions:]
+
+    slash_string_elements = scan_interval_strings[:number_of_recursions]
+    slash_string_elements.reverse()
+    final_interval_strings = slash_string_elements + scan_interval_strings[number_of_recursions:]
+
+    slash_keyboard_elements = scan_keyboard_values[:number_of_recursions]
+    corrected_keyboard_values = scan_keyboard_values[number_of_recursions:]
+    for i in slash_keyboard_elements:
+        print(i)
+        corrected_keyboard_note = \
+            slash_keyboard_note_filter(corrected_keyboard_values, slash_keyboard_value=i, recursion=True)
+        corrected_keyboard_values.insert(0, corrected_keyboard_note)
+    final_keyboard_values = corrected_keyboard_values
+
+    return final_interval_notes, final_interval_strings, final_keyboard_values
