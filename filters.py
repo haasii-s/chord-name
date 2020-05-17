@@ -180,12 +180,15 @@ def slash_keyboard_note_filter(default_keyboard_values, slash_content=None, recu
         slash_keyboard_value = keyboard_note_filter(slash_content)
 
         while slash_keyboard_value > default_keyboard_values[0]:
-            print("something")
             slash_keyboard_value -= 12
 
     else:
-        while (slash_keyboard_value + 12) < default_keyboard_values[0]:
-            print(default_keyboard_values[0], "default")
+        default_reference_value = default_keyboard_values[0]
+        while (slash_keyboard_value + 12) < default_reference_value:
             slash_keyboard_value += 12
+
+        while slash_keyboard_value > default_reference_value:
+            slash_keyboard_value -= 12
+
 
     return slash_keyboard_value

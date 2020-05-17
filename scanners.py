@@ -254,7 +254,6 @@ def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_inte
     slash_keyboard_elements = scan_keyboard_values[:number_of_recursions]
     corrected_keyboard_values = scan_keyboard_values[number_of_recursions:]
     for i in slash_keyboard_elements:
-        print(i)
         corrected_keyboard_note = \
             slash_keyboard_note_filter(corrected_keyboard_values, slash_keyboard_value=i, recursion=True)
         corrected_keyboard_values.insert(0, corrected_keyboard_note)
