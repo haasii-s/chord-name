@@ -8,6 +8,7 @@ __pycache__
 Pipfile.lock
 Pipfile
 venv
+/venv
 key.json
 
 # misc
