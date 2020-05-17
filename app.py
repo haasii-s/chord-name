@@ -1,53 +1,30 @@
+from retrievers import get_chord_web
+
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 app = Flask(__name__)
 
-
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from url parameter
-    name = request.args.get("name", None)
-
-    # For debugging
-    print(f"got name {name}")
-
-    response = {}
-
-    # Check if user sent a name at all
-    if not name:
-        response["ERROR"] = "no name found, please send a name."
-    # Check if the user entered a number not a name
-    elif str(name).isdigit():
-        response["ERROR"] = "name can't be numeric."
-    # Now the user entered a valid name
-    else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
-
-    # Return the response in json format
-    return jsonify(response)
+# CORS(app, resources={r'/.*': {'origins': 'http://localhost:3000/'}})
+CORS(app)
 
 
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        return jsonify({
-            "Message": f"Welcome {name} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD": "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
-        })
+@app.route("/get_chord/", methods=["POST", "GET"])
+def get_chord_post():
+    if request.method == "POST":
+        data = request.json
+        input = data.get("input")
 
-# A welcome message to test our server
-@app.route('/')
+        output = get_chord_web("C")
+        interval_notes, interval_strings = output
+
+        return jsonify(notes=interval_notes, strings=interval_strings)
+
+
+@app.route("/")
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    return "<p>Currently listening on port 5000...</p>"
 
 
-if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
+if __name__ == "__main__":
     app.run(threaded=True, port=5000)
