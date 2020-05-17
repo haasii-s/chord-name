@@ -14,7 +14,7 @@ def get_test():
     if request.method == "GET":
 
         return jsonify(data="GET IS WORKING")
-    
+
 """
 @app.route("/get_chord/", methods=["POST", "GET"])
 def get_chord_post():
