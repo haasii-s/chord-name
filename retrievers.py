@@ -3,10 +3,10 @@ Retriever functions utilise all other functions to return final outputs
 """
 from converters import quality_to_semitones, semitones_to_indices, indices_to_notes, semitones_to_strings
 from filters import root_position_filter, quality_filter, remaining_extension_filter, repeated_interval_filter, \
-    root_filter, no3_filter
+    root_filter, no3_filter, space_bracket_comma_filter, slash_chord_filter
 from in_line_input import user_input
 from scanners import suspension_scanner, extension_scanner, extension_replacement_scan, remove_element_by_index_scan, \
-    no3_scanner
+    no3_scanner, semitones_to_keyboard_inputs, slash_chord_scanner, slash_chord_recursion_scanner
 
 
 def get_chord_in_line():
@@ -42,9 +42,13 @@ def get_chord_in_line():
 
 def get_chord_web(chord):
 
+    chord = space_bracket_comma_filter(chord)
+
     chord = chord[0].upper() + chord[1:]
 
     chord, no3_flag = no3_filter(chord)
+
+    chord, slash_content, slash_found = slash_chord_filter(chord)
 
     root, rootless_chord = root_filter(chord, True)
 
@@ -65,13 +69,23 @@ def get_chord_web(chord):
     else:
         pass
 
+    default_keyboard_values = semitones_to_keyboard_inputs(root, semitone_jumps)
+
     interval_strings.insert(0, "R")
 
     interval_indices = semitones_to_indices(semitone_jumps, root_position)
 
     interval_notes = indices_to_notes(interval_indices, root)
 
-    final_object_template = interval_notes, interval_strings, semitone_jumps
+    if slash_found is True:
+        scan_interval_notes, scan_interval_strings, scan_keyboard_values = \
+            slash_chord_scanner(slash_content, list(interval_notes), interval_strings, default_keyboard_values)
+
+        return slash_chord_recursion_scanner(interval_notes, scan_interval_notes,
+                                             scan_interval_strings, scan_keyboard_values)
+
+    else:
+        final_object_template = interval_notes, interval_strings, default_keyboard_values
 
     return final_object_template
 

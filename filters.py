@@ -2,7 +2,7 @@
 Filter functions pick out single elements from their inputs and return them
 """
 from converters import quality_to_semitones, semitones_to_strings
-from dictionaries import quality_templates, flat_roots, sharp_roots, scan_roots
+from dictionaries import quality_templates, flat_roots, sharp_roots, scan_roots, keyboard_roots
 
 
 def root_filter(chord, web=False):
@@ -135,3 +135,59 @@ def no3_filter(chord):
         return chord, True
     else:
         return chord, False
+
+
+def space_bracket_comma_filter(chord):
+    unacceptable = " (),"
+
+    for i in unacceptable:
+        if i in chord:
+            chord = chord.replace(i, "")
+
+    return chord
+
+
+def slash_chord_filter(chord):
+
+    if "/" in chord:
+        slash_index = chord.index("/")
+        primary_chord = chord[:slash_index]
+
+        slash_content_index = slash_index + 1
+        slash_content = chord[slash_content_index:]
+
+        slash_found = True
+        return primary_chord, slash_content, slash_found
+    else:
+        slash_content = None
+        slash_found = False
+        return chord, slash_content, slash_found
+
+
+def keyboard_note_filter(root):
+
+    keyboard_start_value = 51
+
+    for i in keyboard_roots():
+        if i == root:
+            keyboard_start_value = keyboard_roots().get(i)
+
+    return keyboard_start_value
+
+
+def slash_keyboard_note_filter(default_keyboard_values, slash_content=None, recursion=False, slash_keyboard_value=0):
+
+    if recursion is False:
+
+        slash_keyboard_value = keyboard_note_filter(slash_content)
+
+        while slash_keyboard_value > default_keyboard_values[0]:
+            print("something")
+            slash_keyboard_value -= 12
+
+    else:
+        while (slash_keyboard_value + 12) < default_keyboard_values[0]:
+            print(default_keyboard_values[0], "default")
+            slash_keyboard_value += 12
+
+    return slash_keyboard_value
