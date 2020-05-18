@@ -9,11 +9,9 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/test_get", methods=["GET"])
+@app.route("/test_get/", methods=["GET"])
 def get_test():
-    if request.method == "GET":
-
-        return jsonify(data="GET IS WORKING")
+    return jsonify(data="GET IS WORKING")
 
 
 @app.route("/get_chord/", methods=["POST", "GET"])
