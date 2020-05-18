@@ -46,7 +46,8 @@ if __name__ == "__main__":
     except TypeError:
         print("Chord quality not recognized")
     #"""
-    main()
+
+    #main()
 
     """# Test loop for in line inputs (add while True de-indented prior
     try:

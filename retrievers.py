@@ -41,7 +41,6 @@ def get_chord_in_line():
 
 
 def get_chord_web(chord):
-
     chord = space_bracket_comma_filter(chord)
 
     chord = chord[0].upper() + chord[1:]
@@ -81,17 +80,19 @@ def get_chord_web(chord):
         scan_interval_notes, scan_interval_strings, scan_keyboard_values = \
             slash_chord_scanner(slash_content, list(interval_notes), interval_strings, default_keyboard_values)
 
-        return slash_chord_recursion_scanner(interval_notes, scan_interval_notes,
-                                             scan_interval_strings, scan_keyboard_values)
+        interval_notes, scan_interval_notes, default_keyboard_values = \
+            slash_chord_recursion_scanner(interval_notes, scan_interval_notes,
+                                          scan_interval_strings, scan_keyboard_values)
+
+        return root, interval_notes, scan_interval_notes, default_keyboard_values
 
     else:
-        final_object_template = interval_notes, interval_strings, default_keyboard_values
+        final_object_template = root, interval_notes, interval_strings, default_keyboard_values
 
     return final_object_template
 
 
 def get_chord_single(chord, quality):
-
     remaining_extensions = remaining_extension_filter(chord, quality)
 
     quality_semitones = quality_to_semitones(quality)
@@ -118,7 +119,6 @@ def get_chord_single(chord, quality):
 
 
 def get_chord_single_offline(chord):
-
     quality = quality_filter(chord)
 
     remaining_extensions = remaining_extension_filter(chord, quality)

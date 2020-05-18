@@ -15,18 +15,18 @@ def get_test():
 
         return jsonify(data="GET IS WORKING")
 
-"""
+
 @app.route("/get_chord/", methods=["POST", "GET"])
 def get_chord_post():
     if request.method == "POST":
         data = request.json
-        input = data.get("input")
+        user_input = data.get("input")
 
-        output = get_chord_web("C")
-        interval_notes, interval_strings = output
+        output = get_chord_web(user_input)
+        root, interval_notes, interval_strings, keyboard_values = output
 
-        return jsonify(notes=interval_notes, strings=interval_strings)
-"""
+        return jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
+
 
 @app.route("/")
 def index():
