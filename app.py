@@ -9,13 +9,10 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/test_get", methods=["GET"])
+@app.route("/test_get/", methods=["GET"])
 def get_test():
-    if request.method == "GET":
-
         return jsonify(data="GET IS WORKING")
 
-"""
 @app.route("/get_chord/", methods=["POST", "GET"])
 def get_chord_post():
     if request.method == "POST":
@@ -23,23 +20,9 @@ def get_chord_post():
         input = data.get("input")
 
         output = get_chord_web(input)
-        interval_notes, interval_strings = output
+        interval_notes, interval_strings, keyboard_values = output
 
         return jsonify(notes=interval_notes, strings=interval_strings)
-<<<<<<< HEAD
-
-@app.route("/test_get/", methods="GET"])
-def get_test():
-        data = request.json
-        input = data.get("input")
-
-        output = get_chord_web(input)
-        interval_notes, interval_strings = output
-
-        return jsonify(notes=interval_notes, strings=interval_strings)
-=======
-"""
->>>>>>> ce251fb78203826cc6b4d20e772607604e21e6da
 
 @app.route("/")
 def index():
