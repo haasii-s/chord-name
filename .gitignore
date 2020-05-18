@@ -5,11 +5,14 @@
 .pnp.js
 
 __pycache__
+/__pycache__
 Pipfile.lock
 Pipfile
 venv
 /venv
 key.json
+.idea
+/.idea
 
 # misc
 .DS_Store
