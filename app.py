@@ -20,10 +20,17 @@ def get_chord_post():
         data = request.json
         user_input = data.get("input")
 
-        output = get_chord_web(user_input)
-        root, interval_notes, interval_strings, keyboard_values = output
+        output = None
+        chord_objects = []
 
-        return jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
+        for chord in user_input:
+            output = get_chord_web(chord)
+            root, interval_notes, interval_strings, keyboard_values = output
+            chord_object = \
+                jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
+            chord_objects.append(chord_object)
+
+        return chord_objects
 
 
 @app.route("/")

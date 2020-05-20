@@ -190,5 +190,18 @@ def slash_keyboard_note_filter(default_keyboard_values, slash_content=None, recu
         while slash_keyboard_value > default_reference_value:
             slash_keyboard_value -= 12
 
-
     return slash_keyboard_value
+
+
+def polychord_filter(user_input):
+
+    polychord_found = False
+
+    if "|" in user_input:
+        polychord_found = True
+        chords_found = [chord for chord in user_input.split("|")]
+        return chords_found, polychord_found
+
+    else:
+        return user_input, polychord_found
+

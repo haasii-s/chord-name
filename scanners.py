@@ -201,6 +201,7 @@ def no3_scanner(semitone_jumps, interval_strings):
 
     return semitone_jumps, interval_strings
 
+
 def semitones_to_keyboard_inputs(root, semitone_jumps):
 
     default_keyboard_values = []
@@ -260,3 +261,10 @@ def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_inte
     final_keyboard_values = corrected_keyboard_values
 
     return final_interval_notes, final_interval_strings, final_keyboard_values
+
+
+def octave_shift_up_scanner(keyboard_values):
+
+    shifted_up_values = [i+12 for i in keyboard_values]
+
+    return shifted_up_values

@@ -3,7 +3,7 @@ Retriever functions utilise all other functions to return final outputs
 """
 from converters import quality_to_semitones, semitones_to_indices, indices_to_notes, semitones_to_strings
 from filters import root_position_filter, quality_filter, remaining_extension_filter, repeated_interval_filter, \
-    root_filter, no3_filter, space_bracket_comma_filter, slash_chord_filter
+    root_filter, no3_filter, space_bracket_comma_filter, slash_chord_filter, polychord_filter
 from in_line_input import user_input
 from scanners import suspension_scanner, extension_scanner, extension_replacement_scan, remove_element_by_index_scan, \
     no3_scanner, semitones_to_keyboard_inputs, slash_chord_scanner, slash_chord_recursion_scanner
@@ -42,6 +42,15 @@ def get_chord_in_line():
 
 def get_chord_web(chord):
     chord = space_bracket_comma_filter(chord)
+
+    chord, polychord_found = polychord_filter(chord)
+
+    if polychord_found:
+        all_chords = [get_chord_web(i) for i in chord]
+        return all_chords
+
+    else:
+        pass
 
     chord = chord[0].upper() + chord[1:]
 
