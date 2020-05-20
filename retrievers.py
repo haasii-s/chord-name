@@ -98,7 +98,11 @@ def get_chord_web(chord):
     else:
         final_object_template = root, interval_notes, interval_strings, default_keyboard_values
 
-    return final_object_template
+    if polychord_found is False:
+        return [final_object_template]
+
+    else:
+        return final_object_template
 
 
 def get_chord_single(chord, quality):

@@ -25,10 +25,11 @@ def get_chord_post():
 
         for chord in user_input:
             output = get_chord_web(chord)
-            root, interval_notes, interval_strings, keyboard_values = output
-            chord_object = \
-                jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
-            chord_objects.append(chord_object)
+            for tup in output:
+                root, interval_notes, interval_strings, keyboard_values = tup
+                chord_object = \
+                    jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
+                chord_objects.append(chord_object)
 
         return chord_objects
 
