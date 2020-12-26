@@ -14,7 +14,7 @@ def get_test():
     return jsonify(data="GET IS WORKING")
 
 
-@app.route("/get_chord/", methods=["POST", "GET"])
+"""@app.route("/get_chord/", methods=["POST", "GET"])
 def get_chord_post():
     if request.method == "POST":
         data = request.json
@@ -31,7 +31,7 @@ def get_chord_post():
                     jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
                 chord_objects.append(chord_object)
 
-        return chord_objects
+        return chord_objects"""
 
 
 @app.route("/")
