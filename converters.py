@@ -326,8 +326,8 @@ def notes_to_unique_notes(key, scale_notes):
     return corrected_notes
 
 
-key = input("Enter key: ")
-print(scales_to_notes2("Minor", key))
+"""key = input("Enter key: ")
+print(scales_to_notes2("Minor", key))"""
 
 """
 print(notes_to_unique_notes('C', ['D', 'D#', 'F', 'G', 'G#', 'A#', 'C']))
