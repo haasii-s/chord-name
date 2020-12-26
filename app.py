@@ -18,7 +18,7 @@ def get_test():
 
 
 @app.route("/get_chord/", methods=["POST", "GET"])
-def get_chord_post(polychord=False):
+def get_chord_post():
     if request.method == "POST":
         data = request.json
         user_input = data.get("input")
