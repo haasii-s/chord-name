@@ -3,6 +3,8 @@ from retrievers import get_chord_web
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+import json
+
 app = Flask(__name__)
 
 # CORS(app, resources={r'/.*': {'origins': 'http://localhost:3000/'}})
@@ -14,24 +16,31 @@ def get_test():
     return jsonify(data="GET IS WORKING")
 
 
-"""@app.route("/get_chord/", methods=["POST", "GET"])
+@app.route("/get_chord/", methods=["POST", "GET"])
 def get_chord_post():
     if request.method == "POST":
         data = request.json
         user_input = data.get("input")
 
-        output = None
-        chord_objects = []
+        chords = []
 
-        for chord in user_input:
-            output = get_chord_web(chord)
+        for input_chord in user_input:
+            output = get_chord_web(input_chord)
             for tup in output:
                 root, interval_notes, interval_strings, keyboard_values = tup
-                chord_object = \
-                    jsonify(root=root, notes=interval_notes, strings=interval_strings, keyboard_values=keyboard_values)
-                chord_objects.append(chord_object)
 
-        return chord_objects"""
+                # CODE WORKS UP UNTIL HERE. Jsonify on any of the `tup` attributes gives a an error saying that jsonify cannot work on "Response" types.
+
+                # chord = jsonify(
+                # root=root,
+                # notes=interval_notes,
+                # strings=interval_strings,
+                # keyboard_values=keyboard_values,
+                # )
+
+                chords.append(tup)
+
+        return jsonify(chords=chords)
 
 
 @app.route("/")
