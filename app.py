@@ -29,16 +29,14 @@ def get_chord_post():
             for tup in output:
                 root, interval_notes, interval_strings, keyboard_values = tup
 
-                # CODE WORKS UP UNTIL HERE. Jsonify on any of the `tup` attributes gives a an error saying that jsonify cannot work on "Response" types.
+                chord = {
+                    "root": root,
+                    "notes": interval_notes,
+                    "strings": interval_strings,
+                    "keyboard_values": keyboard_values,
+                }
 
-                # chord = jsonify(
-                # root=root,
-                # notes=interval_notes,
-                # strings=interval_strings,
-                # keyboard_values=keyboard_values,
-                # )
-
-                chords.append(tup)
+                chords.append(chord)
 
         return jsonify(chords=chords)
 
