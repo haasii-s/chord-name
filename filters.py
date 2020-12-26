@@ -135,13 +135,13 @@ def no3_filter(chord):
     else:
         return chord, False
 
+
 def space_bracket_comma_filter(chord):
     unacceptable = " (),"
 
     for i in unacceptable:
         if i in chord:
             chord = chord.replace(i, "")
-
     return chord
 
 
@@ -205,3 +205,16 @@ def polychord_filter(user_input):
     else:
         return user_input, polychord_found
 
+
+def scale_reference_scanner(scale_formula, reference_index, roots):
+    scale_notes = []
+
+    for step in scale_formula:
+        reference_index += step
+
+        if reference_index > 11:
+            reference_index -= 12
+
+        scale_notes.append(roots[reference_index])
+
+    return scale_notes

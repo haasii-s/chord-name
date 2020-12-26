@@ -1,11 +1,10 @@
 """
 Scanner functions alter the input given to them and return the altered inputs based on logic and dictionaries
 """
-from converters import quality_to_semitones, interval_to_int
-from dictionaries import extensions, keyboard_roots, scan_roots
+from converters import quality_to_semitones, interval_to_int, notes_to_semitones, semitones_to_intervals
+from dictionaries import extensions, keyboard_roots, scan_roots, reverse_qualities, quality_templates
 from filters import quality_semitone_strings_filter, keyboard_note_filter, slash_keyboard_note_filter, \
     slash_chord_filter
-
 
 
 def suspension_scanner(remaining_extensions, quality_semitones):
@@ -263,8 +262,55 @@ def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_inte
     return final_interval_notes, final_interval_strings, final_keyboard_values
 
 
-def octave_shift_up_scanner(keyboard_values):
+def polychord_keyboard_correction_scanner(all_chords):
 
-    shifted_up_values = [i+12 for i in keyboard_values]
+    unpacked_keys = [k for (r, n, i, k) in all_chords]
+    print(unpacked_keys)
+    root_chord = [unpacked_keys[0]]
+    fixed_keys = []
 
-    return shifted_up_values
+    while len(unpacked_keys) > 1:
+
+        reference_keys = unpacked_keys[0]
+        keys_to_alter = unpacked_keys[1]
+
+        while keys_to_alter[-1] >= reference_keys[0]:
+            unpacked_keys.insert(1, [key - 12 for key in keys_to_alter])
+            reference_keys = unpacked_keys[0]
+            keys_to_alter = unpacked_keys[1]
+            del unpacked_keys[2]
+
+        fixed_keys.append(unpacked_keys[1])
+
+        del unpacked_keys[0]
+
+    root_chord_and_fixed_keys = root_chord + fixed_keys
+
+    fixed_object = [(r, n, i, fk) for (r, n, i, k), fk in zip(all_chords, root_chord_and_fixed_keys)]
+
+    return fixed_object
+
+
+def quality_search_scan(interval):
+
+    for name, intervals in quality_templates().items():
+
+        if intervals == interval:
+
+            return name
+        else:
+            pass
+
+
+
+
+"""
+notes = input("Enter notes: ")
+
+root, semitones = notes_to_semitones(notes)
+print(semitones)
+interval_list = semitones_to_intervals(semitones)
+print(interval_list)
+quality = quality_search_scan(interval_list)
+print(quality)
+"""

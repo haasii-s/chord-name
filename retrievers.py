@@ -6,7 +6,8 @@ from filters import root_position_filter, quality_filter, remaining_extension_fi
     root_filter, no3_filter, space_bracket_comma_filter, slash_chord_filter, polychord_filter
 from in_line_input import user_input
 from scanners import suspension_scanner, extension_scanner, extension_replacement_scan, remove_element_by_index_scan, \
-    no3_scanner, semitones_to_keyboard_inputs, slash_chord_scanner, slash_chord_recursion_scanner
+    no3_scanner, semitones_to_keyboard_inputs, slash_chord_scanner, slash_chord_recursion_scanner, \
+    polychord_keyboard_correction_scanner
 
 
 def get_chord_in_line():
@@ -40,15 +41,15 @@ def get_chord_in_line():
     print(final_intervals, " ", semitone_strings)
 
 
-def get_chord_web(chord):
+def get_chord_web(chord, polychord=False):
     chord = space_bracket_comma_filter(chord)
 
     chord, polychord_found = polychord_filter(chord)
 
     if polychord_found:
-        all_chords = [get_chord_web(i) for i in chord]
-        return all_chords
-
+        all_chords = [get_chord_web(i, polychord=True) for i in chord]
+        fixed_object = polychord_keyboard_correction_scanner(all_chords)
+        return fixed_object
     else:
         pass
 
@@ -98,14 +99,14 @@ def get_chord_web(chord):
     else:
         final_object_template = root, interval_notes, interval_strings, default_keyboard_values
 
-    if polychord_found is False:
+    if polychord is False:
         return [final_object_template]
 
-    else:
-        return final_object_template
+    return final_object_template
 
 
 def get_chord_single(chord, quality):
+
     remaining_extensions = remaining_extension_filter(chord, quality)
 
     quality_semitones = quality_to_semitones(quality)

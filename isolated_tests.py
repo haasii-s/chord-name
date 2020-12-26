@@ -28,3 +28,40 @@ def polychord_filter(user_input):
 
 print(polychord_filter("Amaj9|Dmin7|F"))
 """
+
+"""
+def func2():
+    l1 = [1,2,3,3,2,4]
+
+    test = list(dict.fromkeys(l1))
+
+    l3 = []
+    for i in test:
+        l3.append(i)
+"""
+"""
+wissy = []
+
+randomGameChars = []
+
+Object[] sortedChars = new Object[gameCharCount]
+
+for (int i = 0; i < gameCharCount; i++){
+    for (int j = 0; j < gameCharCount; j++){
+        if(wissy[i] == randomGameChars[j].wisdom){
+            sortedChars[i] = randomGameChars[j].wisdom
+        }
+    }
+}
+"""
+
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+user_input = thisdict.get("brand")
+
+for chord in user_input:
+    print("found")
