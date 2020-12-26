@@ -32,7 +32,7 @@ def chord_organiser(user_input, chord=None):
 
             chord_dict = {
                 "polychord" : polychord,
-                "chord" : polychords,
+                "chords" : polychords,
             }
 
             chords.append(chord_dict)
@@ -50,7 +50,7 @@ def chord_organiser(user_input, chord=None):
 
             chord_dict = {
                 "polychord" : polychord,
-                "chord" : [chord],
+                "chords" : [chord],
             }
 
             chords.append(chord_dict)
