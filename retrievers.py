@@ -49,7 +49,7 @@ def get_chord_web(chord, polychord=False):
     if polychord_found:
         all_chords = [get_chord_web(i, polychord=True) for i in chord]
         fixed_object = polychord_keyboard_correction_scanner(all_chords)
-        return fixed_object
+        return True, fixed_object
     else:
         pass
 

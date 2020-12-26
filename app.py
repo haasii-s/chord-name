@@ -1,4 +1,5 @@
 from retrievers import get_chord_web
+from post_logic import initial_polychord_test, chord_organiser
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -17,14 +18,18 @@ def get_test():
 
 
 @app.route("/get_chord/", methods=["POST", "GET"])
-def get_chord_post():
+def get_chord_post(polychord=False):
     if request.method == "POST":
         data = request.json
         user_input = data.get("input")
+        chords = chord_organiser(user_input)
+        return jsonify(chords=chords)
 
-        chords = []
+
+"""        chords = []
 
         for input_chord in user_input:
+            polychord = initial_polychord_test(input_chord)
             output = get_chord_web(input_chord)
             for tup in output:
                 root, interval_notes, interval_strings, keyboard_values = tup
@@ -36,9 +41,7 @@ def get_chord_post():
                     "keyboard_values": keyboard_values,
                 }
 
-                chords.append(chord)
-
-        return jsonify(chords=chords)
+                chords.append(chord)"""
 
 
 @app.route("/")
