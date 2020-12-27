@@ -16,8 +16,6 @@ def chord_organiser(user_input, chord=None):
     for input_chord in [user_input]:
         polychord = initial_polychord_test(input_chord)
         output = get_chord_web(input_chord)
-        print(polychord)
-        print(output)
         if polychord:
             polychords = []
             for tup in output:
