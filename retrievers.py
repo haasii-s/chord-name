@@ -94,7 +94,7 @@ def get_chord_web(chord, polychord=False):
             slash_chord_recursion_scanner(interval_notes, scan_interval_notes,
                                           scan_interval_strings, scan_keyboard_values)
 
-        return root, interval_notes, scan_interval_notes, default_keyboard_values
+        final_object_template = root, interval_notes, scan_interval_notes, default_keyboard_values
 
     else:
         final_object_template = root, interval_notes, interval_strings, default_keyboard_values

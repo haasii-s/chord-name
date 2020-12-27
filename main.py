@@ -1,6 +1,7 @@
 """
 Used for cProfile time testing
 """
+from post_logic import chord_organiser
 from retrievers import get_chord_web, get_chord_in_line
 from scanners import semitones_to_keyboard_inputs
 
@@ -25,6 +26,9 @@ def main():
 
     full_chord = input("Enter chord: ")
     print(get_chord_web(full_chord))
+
+    post_logic_chord = chord_organiser(full_chord)
+    print(post_logic_chord)
 
     """
     full_chord = "C#" + name
