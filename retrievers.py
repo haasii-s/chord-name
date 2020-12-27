@@ -45,7 +45,6 @@ def get_chord_web(chord, polychord=False):
     chord = space_bracket_comma_filter(chord)
 
     chord, polychord_found = polychord_filter(chord)
-
     if polychord_found:
         all_chords = [get_chord_web(i, polychord=True) for i in chord]
         fixed_object = polychord_keyboard_correction_scanner(all_chords)

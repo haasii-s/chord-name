@@ -1,7 +1,7 @@
 """
 Used for cProfile time testing
 """
-from post_logic import chord_organiser
+from post_logic import chord_organiser, poly_and_slash_capitalization_filter
 from retrievers import get_chord_web, get_chord_in_line
 from scanners import semitones_to_keyboard_inputs
 
@@ -25,6 +25,7 @@ def main():
     # print(semitones_to_keyboard_inputs("C#", [4, 5, 6, 10, 13, 14, 20, 21]))
 
     full_chord = input("Enter chord: ")
+    print(poly_and_slash_capitalization_filter(full_chord))
     #print(get_chord_web(full_chord))
 
     post_logic_chord = chord_organiser([full_chord])
@@ -51,14 +52,15 @@ if __name__ == "__main__":
         print("Chord quality not recognized")
     """
 
-    #main()
-
+    main()
+    """
     # Test loop for in line inputs (add while True de-indented prior
     try:
         main()
     except TypeError:
+        print("TypeError")
         print("chord not recognized")
-
+    """
     """
     import cProfile
     cProfile.run("main()", "output.dat")
