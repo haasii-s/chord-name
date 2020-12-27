@@ -263,7 +263,7 @@ def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_inte
 
 
 def polychord_keyboard_correction_scanner(all_chords):
-    print(all_chords)
+    #print(all_chords)
     #[[20,21,22],[18,19,20]]  A|B
     unpacked_keys = [k for (r, n, i, k) in all_chords]
     #print(unpacked_keys)

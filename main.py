@@ -25,9 +25,9 @@ def main():
     # print(semitones_to_keyboard_inputs("C#", [4, 5, 6, 10, 13, 14, 20, 21]))
 
     full_chord = input("Enter chord: ")
-    print(get_chord_web(full_chord))
+    #print(get_chord_web(full_chord))
 
-    post_logic_chord = chord_organiser(full_chord)
+    post_logic_chord = chord_organiser([full_chord])
     print(post_logic_chord)
 
     """
