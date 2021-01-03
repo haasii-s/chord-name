@@ -63,9 +63,11 @@ def get_chord_web(chord, polychord=False):
     quality = quality_filter(chord, root)
 
     root_position = root_position_filter(root)
-
+    #print(rootless_chord)
+    #print("rootless chord^")
     output_template = get_chord_single(rootless_chord, quality)
-
+    #print(output_template)
+    #print("output^")
     try:
         all_extensions, semitone_jumps, interval_strings = output_template
     except TypeError:
@@ -129,6 +131,10 @@ def get_chord_single(chord, quality):
             final_semitone_revision, semitone_indices_to_replace)
 
         return chord, final_semitone_revision, final_semitone_strings
+
+    else:
+        print("136 retrievers \nRepeated interval")
+        return
 
 
 def get_chord_single_offline(chord):

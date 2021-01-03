@@ -103,6 +103,8 @@ def extension_scanner(remaining_extensions, first_semitone_revision, quality, mu
 
     elif multi_scan is True:
         if len(list(dict.fromkeys(final_semitone_revision))) != len(final_semitone_revision):
+            print("extension_scanner()")
+            
             return None
 
         else:
@@ -237,7 +239,9 @@ def slash_chord_scanner(slash_content, interval_notes, interval_strings, default
         return interval_notes, interval_strings, default_keyboard_values
 
     else:
-        return interval_notes, interval_strings, default_keyboard_values
+        print("slash_chord_scanner()")
+        print("slash chord content invalid")
+        return
 
 
 def slash_chord_recursion_scanner(interval_notes, scan_interval_notes, scan_interval_strings, scan_keyboard_values):

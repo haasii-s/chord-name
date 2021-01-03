@@ -222,7 +222,7 @@ def scales_to_notes2(scale, key, preference=False):
         flat_notes = reference_to_notes(scale_formula, flat_reference_index, flats)
         sharp_notes = reference_to_notes(scale_formula, sharp_reference_index, sharps)
 
-        print(flat_notes, sharp_notes)
+        #print(flat_notes, sharp_notes)
 
     elif key in flats and key not in sharps:
 
@@ -234,7 +234,7 @@ def scales_to_notes2(scale, key, preference=False):
         flat_notes = reference_to_notes(scale_formula, flat_reference_index, flats)
         sharp_notes = reference_to_notes(scale_formula, sharp_reference_index, sharps)
 
-        print(flat_notes, sharp_notes)
+        #print(flat_notes, sharp_notes)
 
     elif key in sharps and key not in flats:
 
@@ -246,14 +246,14 @@ def scales_to_notes2(scale, key, preference=False):
         flat_notes = reference_to_notes(scale_formula, flat_reference_index, flats)
         sharp_notes = reference_to_notes(scale_formula, sharp_reference_index, sharps)
 
-        print(flat_notes, sharp_notes)
+        #print(flat_notes, sharp_notes)
 
     elif key in theoretical:
         theoretical_reference_index = theoretical.index(key)
 
         theoretical_reference_index = reference_to_notes(scale_formula, theoretical_reference_index, theoretical)
 
-        print(theoretical_reference_index)
+        #print(theoretical_reference_index)
 
 
 def reference_to_notes(scale_formula, reference_index, roots):
@@ -283,9 +283,9 @@ def notes_to_unique_notes(key, scale_notes):
         elif "b" in note:
             flat = True
 
-    print(flat)
-    print(sharp)
-    print(scale_notes)
+    #print(flat)
+    #print(sharp)
+    #print(scale_notes)
 
     correction_runs = 3
 
@@ -297,15 +297,15 @@ def notes_to_unique_notes(key, scale_notes):
             j = scale_notes[-1:0:-1]
             i = scale_notes[-2::-1]
 
-            print(j, "j")
-            print(i, "i")
+            #print(j, "j")
+            #print(i, "i")
 
             corrected_notes = \
                 [double_flats().get(j)
                  if j[0] == i[0] else j
                  for j, i in zip(scale_notes[-1:0:-1], scale_notes[-2::-1])]
 
-            print(corrected_notes)
+            #print(corrected_notes)
 
             corrected_notes.append(key)
             correction_runs -= 1

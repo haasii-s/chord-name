@@ -1,9 +1,10 @@
 """
 Used for cProfile time testing
 """
-from post_logic import chord_organiser, poly_and_slash_capitalization_filter
+from post_logic import chord_organiser, poly_and_slash_capitalization_filter, available_keyboard_values
 from retrievers import get_chord_web, get_chord_in_line
 from scanners import semitones_to_keyboard_inputs
+from keys import key_correction
 
 
 def main():
@@ -20,6 +21,10 @@ def main():
     """
     # Test in line input
     # print(get_chord_in_line())
+
+    #key_correction(input(), [2, 1, 2, 2, 1, 3, 1])
+
+    #available_keyboard_values([60, 63, 67, 70, 74])
 
     # Test semitones to keys mapping
     # print(semitones_to_keyboard_inputs("C#", [4, 5, 6, 10, 13, 14, 20, 21]))
